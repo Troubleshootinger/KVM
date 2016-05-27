@@ -60,3 +60,4 @@ virsh edit trusty1404 # !!!
 
 # Resize disk space  
 virsh vol-resize your_volume_name.img 100G --pool master_pool  
+qemu-img resize /virt/disks/winsvr2012_6.img +10G
