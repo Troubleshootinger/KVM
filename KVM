@@ -1,3 +1,4 @@
+egrep -o '(vmx|svm)' /proc/cpuinfo
 apt-get install qemu-kvm libvirt-bin virtinst bridge-utils
 
 virt-install --name trusty1404 --hvm --ram 1024 --vcpus 1 --disk path=/virt/disks/trusty1404.img,format=qcow2,size=10 \
