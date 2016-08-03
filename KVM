@@ -34,3 +34,15 @@ brctl show
 
 
 qemu-img resize /virt/disks/winsvr2012_6.img +10G
+##############################################################创建openstack镜像
+1 win下的镜像制作
+qemu-img create -f qcow2 windows_server_2012_r2_x64.qcow2 15G
+
+因为win默认不支持virtio驱动，而通过openstack管理虚拟机是需要virtio驱动的。需要两个virtio驱动，一个是硬盘的，一个是网卡 
+下载地址： 
+https://fedoraproject.org/wiki/Windows_Virtio_Drivers#Direct_download 
+kvm -m 1024 -cdrom /home/ubuntu/windows_server_2012.iso -drive file=windows_server_2012_r2_x64.qcow2,if=virtio,boot=on -fda virtio-win_amd64.vfd -boot d -nographic -vnc :4
+装完之后关机，执行以下
+kvm -m 1024 -drive file=windows_server_2012_r2_x64.qcow2,if=virtio,boot=on -cdrom virtio-win-0.1.118.iso -net nic,model=virtio -net user -boot c -nographic -vnc :4
+
+2 ubuntu 镜像制作  安装完成之后apt-get update下就OK
